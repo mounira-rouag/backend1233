@@ -64,14 +64,14 @@ public class FonctionController {
     }
     @GetMapping("/by-Dev/{devId}")
     public List<Fonction> getFonctionsByDev(@PathVariable int devId) {
-        Optional<Dev> dev=devRepo.findById(devId);
-        if (dev.isPresent()) {
-            Dev founddev = dev.get();
-            List<Fonction> fonctions = dev.get().getFonctions();
-            return fonctions;
+        Optional<Dev> optionalDev = devRepo.findById(devId);
+        if (optionalDev.isPresent()) {
+            return optionalDev.get().getFonctions();
         } else {
-            return Collections.emptyList();  // Or throw an appropriate exception
+            // Handle the case when the dev with the given id is not found
+            return Collections.emptyList();
         }
+
 
     }
 }

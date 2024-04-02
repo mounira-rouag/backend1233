@@ -70,11 +70,11 @@ public class Dev {
     )
     private List<Vehicule> vehicules;
 
-@JsonIgnore
+
     @ManyToMany
     @JoinTable(  name = "`FCT_BY_DEV`",
-            joinColumns = @JoinColumn(name = "`IdFonction`"),
-            inverseJoinColumns ={ @JoinColumn(name = "`IdDev`"),
+            joinColumns = @JoinColumn(name = "`IdDev`"),
+            inverseJoinColumns ={ @JoinColumn(name = "`IdFonction`"),
 
             }
     )
@@ -83,8 +83,8 @@ public class Dev {
 
     @ManyToMany
     @JoinTable(  name = "`VALID_BY_DEV`",
-            joinColumns = @JoinColumn(name = "`IdValid`"),
-            inverseJoinColumns ={ @JoinColumn(name = "`IdDev`"),
+            joinColumns = @JoinColumn(name = "`IdDev`"),
+            inverseJoinColumns ={ @JoinColumn(name = "`IdValid`"),
 
             }
     )

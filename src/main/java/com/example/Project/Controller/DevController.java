@@ -152,4 +152,13 @@ private final VehiculeServiceImpl vehiculeServieImpl;
 
         return devRepo.save(existingDev);
     }
+    @DeleteMapping("/{devId}/validations/{validationId}")
+    public void deleteValidationFromDev(@PathVariable  Integer devId,@PathVariable int validationId) {
+        Dev dev = devRepo.findById(devId).orElse(null);
+        if (dev != null) {
+            dev.getValidations().removeIf(validation -> validation.getIdValid() == validationId);
+            devRepo.save(dev);
+
+        }
+    }
 }
