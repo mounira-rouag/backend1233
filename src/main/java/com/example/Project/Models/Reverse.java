@@ -32,6 +32,7 @@ public class Reverse {
 
     @Column(name = "`GEO`")
     private String geo;
+
     @JsonIgnore
     @OneToMany(mappedBy = "reverse")
     private List<CDC> cdc;

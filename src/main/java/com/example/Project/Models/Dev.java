@@ -89,5 +89,13 @@ public class Dev {
             }
     )
     private List<Validation> validations;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(  name = "`CABLE_BY_DEV`",
+            joinColumns = @JoinColumn(name = "`IdDev`"),
+            inverseJoinColumns ={ @JoinColumn(name = "`ID_CABLE`"),
 
+            }
+    )
+    private List<Cables> cables;
 }
