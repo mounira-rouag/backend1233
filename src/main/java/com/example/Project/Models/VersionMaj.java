@@ -26,7 +26,7 @@ public class VersionMaj {
     private Integer ordre;
 
     @Column(name = "`IdMaj`")
-    private Integer idMaj;
+    private int idMaj;
 
     @Column(name = "`Compilateur`")
     private String compilateur;

@@ -31,6 +31,8 @@ public class Dev {
     @Column(name = "`NumBugzilla`")
     private String numBug;
     private String Jira;
+    @Column(name = "`IdMajPrecedent`")
+    private String IdMajPrecedent;
 
     @ManyToOne
     @JoinColumn(name = "`IdCDC`")
