@@ -32,7 +32,7 @@ public class Dev {
     private String numBug;
     private String Jira;
     @Column(name = "`IdMajPrecedent`")
-    private String IdMajPrecedent;
+    private int IdMajPrecedent;
 
     @ManyToOne
     @JoinColumn(name = "`IdCDC`")
@@ -91,10 +91,10 @@ public class Dev {
             }
     )
     private List<Validation> validations;
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(  name = "`CABLE_BY_DEV`",
-            joinColumns = @JoinColumn(name = "`IdDev`"),
+            joinColumns = @JoinColumn(name = "`ID_DEV`"),
             inverseJoinColumns ={ @JoinColumn(name = "`ID_CABLE`"),
 
             }

@@ -31,7 +31,7 @@ private final ValidationServiceImpl validationServiceImpl;
         return validationRepo.findAll();
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public Validation saveValidation(@RequestBody Validation validation){
         return validationRepo.save(validation);
     }
@@ -41,9 +41,6 @@ private final ValidationServiceImpl validationServiceImpl;
 
         return validationRepo.findById(id).get();
     }
-
-
-
     @GetMapping("/by-dev/{iddev}")
     public List<Validation> getValidationByDev(@PathVariable int iddev) {
 
@@ -56,7 +53,6 @@ private final ValidationServiceImpl validationServiceImpl;
             // Use FetchType.EAGER to eagerly fetch validations
             validations = dev.getValidations();
         }
-
         return validations;
     }
     @GetMapping("/version-name/{idvalidation}")

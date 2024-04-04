@@ -141,6 +141,7 @@ private final VehiculeServiceImpl vehiculeServieImpl;
         existingDev.setDll(updatedDev.getDll());
         existingDev.setDevDuplique(updatedDev.isDevDuplique());
         existingDev.setDevComment(updatedDev.getDevComment());
+        existingDev.setIdMajPrecedent(updatedDev.getIdMajPrecedent());
         existingDev.setNumBug(updatedDev.getNumBug());
         existingDev.setCdc(updatedDev.getCdc());
         existingDev.setFonctions(updatedDev.getFonctions());
