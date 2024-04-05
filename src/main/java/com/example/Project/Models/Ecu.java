@@ -28,6 +28,10 @@ public class Ecu {
     @OneToMany(mappedBy = "ecu")
     private List<Dev> dev;
 
+    public Famille getFamille() {
+        return famille;
+    }
+
     @ManyToOne
     @JoinColumn(name = "`IdFamille`")
     private Famille famille;

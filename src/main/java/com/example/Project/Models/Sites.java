@@ -24,5 +24,9 @@ public class Sites {
     @Column(name = "`NomSite`")
     private String NomSite;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "sites")
+    private List<CDC> cdc;
+
 
 }

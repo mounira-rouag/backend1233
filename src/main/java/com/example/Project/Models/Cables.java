@@ -32,6 +32,8 @@ public class Cables {
 
     @Column(name = "`NumDico`")
     private Integer numDico;
+    @Column(name = "`name`")
+  private String Name;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "cables")

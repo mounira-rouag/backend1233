@@ -6,6 +6,7 @@ import com.example.Project.Models.Dev;
 import com.example.Project.Models.Validation;
 import com.example.Project.Repositories.CablesRepository;
 import com.example.Project.Repositories.DevRepository;
+import com.example.Project.Services.CablesServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -20,15 +21,45 @@ public class CablesController {
 
     final private CablesRepository cableRepo;
     final private DevRepository devRepo;
+    final private CablesServices cablesServices;
 
-    public CablesController(CablesRepository cableRepo, DevRepository devRepo) {
+    public CablesController(CablesRepository cableRepo, DevRepository devRepo, CablesServices cablesServices) {
         this.cableRepo = cableRepo;
         this.devRepo = devRepo;
+        this.cablesServices = cablesServices;
     }
 
     @GetMapping("/all")
     public List<Cables> getAllCables() {
-        return cableRepo.findAll();
+       List<Cables> cables=cableRepo.findAll();
+
+        String specificName = "PAS ADAPTATEUR"; // Specify the name of the adapter to exclude
+
+        List<Cables> filteredCables = cables.stream()
+                .filter(cable -> !cable.getAtalName().equals(specificName) )
+                .collect(Collectors.toList());
+
+        for (Cables cable : filteredCables) {
+            switch (cable.getNumDico()) {
+                case 256:
+                    cable.setName("Adaptateur PSA CAN");
+                    break;
+                case 257:
+                    cable.setName("Adaptateur OBD1");
+                    break;
+
+                case 305:
+                    cable.setName("Adaptateur OBD1n");
+                    break;
+                case 352:
+                    cable.setName("Adaptateur VAG/N");
+                    break;
+                // ... other cases
+                default:
+                    cable.setName("Adaptateur SEAT/SKODA");
+            }
+        }
+        return filteredCables;
     }
 
     @PostMapping("cretae")
@@ -53,11 +84,31 @@ public class CablesController {
             cables = dev.getCables();
 
             // Filter out the "no adapter" adapter
-            cables = cables.stream()
-                    .filter(cable -> !"PAS ADAPTATEUR".equals(cable.getActiaName()))
-                    .collect(Collectors.toList());
+            for (Cables cable : cables) {
+                switch (cable.getNumDico()) {
+                    case 256:
+                        cable.setName("Adaptateur PSA CAN");
+                        break;
+                    case 257:
+                        cable.setName("Adaptateur OBD1");
+                        break;
+
+                    case 305:
+                        cable.setName("Adaptateur OBD1n");
+                        break;
+                    case 352:
+                        cable.setName("Adaptateur VAG/N");
+                        break;
+                    // ... other cases
+                    default:
+                        cable.setName("Adaptateur SEAT/SKODA");
+                }
+            }
+
         }
 
         return cables;
     }
+
+
 }

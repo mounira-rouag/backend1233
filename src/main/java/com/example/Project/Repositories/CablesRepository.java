@@ -10,5 +10,4 @@ import java.util.List;
 @Repository
 public interface CablesRepository extends JpaRepository<Cables,Integer> {
 
-
 }

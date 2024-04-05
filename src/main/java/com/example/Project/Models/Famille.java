@@ -2,10 +2,7 @@ package com.example.Project.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-
+@Data
 public class Famille {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,9 +33,12 @@ public class Famille {
     private boolean guidedMethFilter;
     @Column(name = "`SparePartsFilter`")
     private boolean sparePartsFilter;
+@JsonIgnore
 
-    @JsonIgnore
     @OneToMany(mappedBy = "famille")
     private List<Ecu> ecu;
 
+    public List<Ecu> getEcu() {
+        return ecu;
+    }
 }

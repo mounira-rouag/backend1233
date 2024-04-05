@@ -46,6 +46,9 @@ public class CDC {
     @OneToMany(mappedBy = "cdc")
     private List<Dev> dev;
 
+    @ManyToOne
+    @JoinColumn(name = "`IdSite`")
+    private Sites sites;
 
     @ManyToOne
     @JoinColumn(name = "`IdReverse`")

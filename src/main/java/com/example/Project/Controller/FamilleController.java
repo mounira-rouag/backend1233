@@ -9,7 +9,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/family")
 public class FamilleController {
 private final FamilleRepository famillRepo;
 
@@ -17,7 +17,7 @@ private final FamilleRepository famillRepo;
         this.famillRepo = famillRepo;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Famille> getAllFamilles() {
 
         return famillRepo.findAll() ;
