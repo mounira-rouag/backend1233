@@ -1,5 +1,6 @@
 package com.example.Project.Controller;
 
+import com.example.Project.Models.Cables;
 import com.example.Project.Models.Dev;
 import com.example.Project.Models.Validation;
 import com.example.Project.Repositories.DevRepository;
@@ -28,7 +29,18 @@ private final ValidationServiceImpl validationServiceImpl;
 
     @GetMapping("/all")
     public List<Validation> getAllValidations() {
-        return validationRepo.findAll();
+        List<Validation> validations= validationRepo.findAll();
+        for (Validation validation  : validations) {
+            switch (validation.getTypeValid()) {
+                case "Véhicule":
+                    validation.setName("Test Integration");
+                    break;
+
+                default:
+                    validation.setName("Test Unitaire");
+            }
+        }
+        return validations;
     }
 
     @PostMapping("/create")
@@ -52,6 +64,16 @@ private final ValidationServiceImpl validationServiceImpl;
 
             // Use FetchType.EAGER to eagerly fetch validations
             validations = dev.getValidations();
+            for (Validation validation  : validations) {
+                switch (validation.getTypeValid()) {
+                    case "Véhicule":
+                        validation.setName("Test Integration");
+                        break;
+
+                    default:
+                        validation.setName("Test Unitaire");
+                }
+            }
         }
         return validations;
     }

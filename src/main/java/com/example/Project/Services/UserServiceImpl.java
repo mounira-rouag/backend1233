@@ -55,7 +55,13 @@ public class UserServiceImpl {
             existingUser.setLastname(updatedUser.getLastname());
             existingUser.setSite(updatedUser.getSite());
 
-            userInterface.save(existingUser);
+
+                String encryptedPassword = passwordEncoder.encode(updatedUser.getPassword());
+                existingUser.setPassword(encryptedPassword);
+                System.out.println("the new password is "+existingUser.getPassword());
+
+
+            saveUser(existingUser);
         } else {
             throw new IllegalArgumentException("User not found with ID: " + userId);
         }

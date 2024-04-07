@@ -34,6 +34,8 @@ public class Validation {
     @Column(name = "`IdVer`")
     private int IdVer;
 
+    private String name;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "validations")
     private List<Dev> devs;

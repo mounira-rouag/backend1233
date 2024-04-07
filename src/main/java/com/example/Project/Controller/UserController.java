@@ -128,5 +128,6 @@ public class UserController {
         byte[] randomBytes = new byte[length];
         secureRandom.nextBytes(randomBytes);
         return base64Encoder.encodeToString(randomBytes);
+
     }
 }
