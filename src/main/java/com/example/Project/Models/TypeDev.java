@@ -1,10 +1,13 @@
 package com.example.Project.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name="`TYPE_DEV`")
@@ -27,4 +30,8 @@ public class TypeDev {
 
     @Column(name = "`Ordre`")
     private Integer Ordre;
+    @JsonIgnore
+    @OneToMany(mappedBy = "typeDev")
+    private List<Dev> dev;
+
 }

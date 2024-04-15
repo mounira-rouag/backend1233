@@ -44,4 +44,7 @@ public class Maj {
     @OneToMany(mappedBy = "maj")
     private List<Dev> dev;
 
+    public List<Dev> getDev() {
+        return dev;
+    }
 }

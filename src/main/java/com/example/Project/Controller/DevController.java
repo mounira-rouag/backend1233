@@ -6,7 +6,9 @@ import com.example.Project.Repositories.*;
 import com.example.Project.Services.CDCServiceImpl;
 import com.example.Project.Services.DevServiceImpl;
 import com.example.Project.Services.VehiculeServiceImpl;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -48,23 +50,26 @@ private final VehiculeServiceImpl vehiculeServieImpl;
     public List<Dev> getAllMarqueNames() {
         return devServiceImpl.getAllDev();
     }
-
+    @Transactional
     @PostMapping("dev/create")
     public Dev createDev(@RequestBody Dto creationdto){
-
         return devServiceImpl.CreatDev(creationdto);
     }
     @PostMapping("/dev/add")
     public Dev addDev(@RequestBody Dev dev) {
-        // Save the new dev to the database
         return devRepo.save(dev);
     }
-    /**
-    @PostMapping("dev/add")
-    public Dev addDev(@RequestBody Dev dev){
 
+    @PostMapping("dev/duplicate")
+    public Dev DuplicateDev(@RequestBody Dev dev,int versionCode ,int siteCode ,int rcCode, int checkMenu,int optVeh,int optCor,int optCdc ){
+
+        dev.setDevDuplique(true);
+          Dev DuplicatedDev;
         return devRepo.save(dev);
-    }*/
+    }
+
+
+
     @GetMapping("/dev/all")
     public List<Dev> getAllDevs() {
         return devRepo.findAll();

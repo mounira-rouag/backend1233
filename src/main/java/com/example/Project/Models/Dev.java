@@ -33,10 +33,18 @@ public class Dev {
     private String Jira;
     @Column(name = "`IdMajPrecedent`")
     private int IdMajPrecedent;
+    @Column(name = "`DevPrecedent`")
+    private int DevPrecedent;
+    @Column(name = "`DevEnCoursUtilisation`")
+    private boolean DevEnCoursUtilisation;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "`IdCDC`")
     private CDC cdc;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "`IdTypeDev`")
+    private TypeDev typeDev;
+
 
 
     @ManyToOne
@@ -62,6 +70,10 @@ public class Dev {
     @ManyToOne
     @JoinColumn(name = "`IdRC`")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "`IdSite`")
+    private Sites sites;
 
     @ManyToMany
     @JoinTable(  name = "`VEH_BY_DEV`",

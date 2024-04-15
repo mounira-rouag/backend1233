@@ -1,5 +1,6 @@
 package com.example.Project.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name="`MENU`")
@@ -42,4 +44,7 @@ public class Menu {
     @Column(name = "`NoDtcNegFilter`")
     private boolean NoDtcNegFilter;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "menus")
+    private List<PointEntree> pointEntrees;
 }

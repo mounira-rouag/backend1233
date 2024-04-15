@@ -130,4 +130,31 @@ public class UserController {
         return base64Encoder.encodeToString(randomBytes);
 
     }
+
+    @DeleteMapping("/users/{id}")
+    public String deleteUserAndReinsert(@PathVariable int id) {
+        // Retrieve the user by ID
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        // Delete the user from the database
+
+
+        // Reinsert the user with the same ID
+        User newUser = new User();
+        newUser.setId(user.getId());
+        newUser.setLastname(user.getLastname());
+        newUser.setFirstname(user.getFirstname());
+        newUser.setUsername(user.getUsername());
+        newUser.setEmail("ali@actia-engineering.tn");
+
+
+
+
+
+
+        userRepository.save(newUser);
+
+        return "User deleted and reinserted successfully with ID: " + id;
+    }
 }

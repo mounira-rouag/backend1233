@@ -5,6 +5,7 @@ import com.example.Project.Models.Dev;
 import com.example.Project.Models.Maj;
 import com.example.Project.Models.Marque;
 import com.example.Project.Models.VersionMaj;
+import com.example.Project.Repositories.DevRepository;
 import com.example.Project.Repositories.MajRepository;
 import com.example.Project.Services.MajServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,11 @@ public class MAJController {
 
     private final MajRepository majRepo;
     private final MajServiceImpl majServieImpl;
-    public MAJController(MajRepository majRepo, MajServiceImpl majServieImpl) {
+    private final DevRepository devRepository;
+    public MAJController(MajRepository majRepo, MajServiceImpl majServieImpl, DevRepository devRepository) {
         this.majRepo = majRepo;
         this.majServieImpl = majServieImpl;
+        this.devRepository = devRepository;
     }
     int previousIdMaj=0;
     @GetMapping("/all-versions")
@@ -31,13 +34,19 @@ public class MAJController {
 }
 
     @PostMapping("maj/creat")
-    public Maj createDev(@RequestBody Maj maj){
+    public Maj createMaj(@RequestBody Maj maj){
 
         return majRepo.save(maj);
     }
     @GetMapping("/{id}")
     public Maj finMajById(@PathVariable int id){
         return majRepo.findById(id).get();
+    }
+
+    @GetMapping("/findByDev/{id}")
+    public Maj finMajByDev(@PathVariable int id){
+        Dev dev=devRepository.findById(id).get();
+        return majRepo.findMajByDev(dev);
     }
 
    /** @GetMapping("/previous-maj")
